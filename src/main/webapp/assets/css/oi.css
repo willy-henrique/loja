@@ -1,0 +1,92 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    align-items: center;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Banner */
+.banner {
+    background: url('banner.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.banner .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff4500;
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+/* Produtos */
+.destaques {
+    padding: 30px;
+    text-align: center;
+}
+
+.produtos-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.produto {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    max-width: 200px;
+}
+
+.produto img {
+    width: 100%;
+}
+
+.produto .btn {
+    background: #008CBA;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.produto .btn:hover {
+    background: #005f75;
+}
+
+/* Rodapé */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+}
