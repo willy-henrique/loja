@@ -1,8 +1,8 @@
-package controller;
+package com.mave.loja.controler;
 
-import dao.ProdutoDAO;
-import model.CarrinhoItem;
-import model.Produto;
+import com.mave.loja.dao.ProdutoDAO;
+import com.mave.loja.model.CarrinhoItem;
+import com.mave.loja.model.Produto;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,6 +19,13 @@ public class CarrinhoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        List<CarrinhoItem> carrinho = obterCarrinho(session);
+
+        // Calcula o valor total do carrinho
+        double total = calcularTotalCarrinho(carrinho);
+        request.setAttribute("totalCarrinho", total);
+
         request.getRequestDispatcher("/WEB-INF/views/carrinho.jsp").forward(request, response);
     }
 
@@ -44,6 +51,9 @@ public class CarrinhoServlet extends HttpServlet {
                 adicionarProduto(carrinho, produtoId, quantidade);
             } else if ("remover".equals(acao)) {
                 removerProduto(carrinho, produtoId);
+            } else if ("atualizar".equals(acao)) {
+                int quantidade = (quantidadeParam != null && !quantidadeParam.isEmpty()) ? Integer.parseInt(quantidadeParam) : 1;
+                atualizarQuantidade(carrinho, produtoId, quantidade);
             }
 
             session.setAttribute("carrinho", carrinho);
@@ -81,5 +91,27 @@ public class CarrinhoServlet extends HttpServlet {
 
     private void removerProduto(List<CarrinhoItem> carrinho, int produtoId) {
         carrinho.removeIf(item -> item.getProduto().getId() == produtoId);
+    }
+
+    private void atualizarQuantidade(List<CarrinhoItem> carrinho, int produtoId, int quantidade) {
+        if (quantidade <= 0) {
+            removerProduto(carrinho, produtoId);
+            return;
+        }
+
+        for (CarrinhoItem item : carrinho) {
+            if (item.getProduto().getId() == produtoId) {
+                item.setQuantidade(quantidade);
+                return;
+            }
+        }
+    }
+
+    private double calcularTotalCarrinho(List<CarrinhoItem> carrinho) {
+        double total = 0.0;
+        for (CarrinhoItem item : carrinho) {
+            total += item.getProduto().getPreco() * item.getQuantidade();
+        }
+        return total;
     }
 }

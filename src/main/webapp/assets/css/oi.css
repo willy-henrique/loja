@@ -6,87 +6,304 @@
     font-family: Arial, sans-serif;
 }
 
+/* Cores principais */
+:root {
+    --primary-color: #00BF63;
+    --dark-green: #008C4A;
+    --light-green: #66E09F;
+    --white: #fff;
+    --gray: #eaf5ea;
+    --dark-gray: #2d3e34;
+}
+
+/* Estilos gerais */
+body {
+    background-color: var(--gray);
+    color: var(--dark-gray);
+    padding-top: 70px; /* Espaço para a navbar fixa */
+}
+
 /* Navbar */
 .navbar {
-    background: #333;
-    color: white;
+    background: var(--primary-color);
+    color: var(--white);
     display: flex;
     justify-content: space-between;
-    padding: 15px 20px;
+    padding: 15px 50px;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.navbar ul {
-    list-style: none;
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
     display: flex;
+    list-style: none;
+    gap: 20px;
 }
 
-.navbar ul li {
-    margin-left: 20px;
-}
-
-.navbar ul li a {
-    color: white;
+.navbar .nav-links li a {
+    color: var(--white);
     text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar .nav-links li a:hover {
+    color: var(--light-green);
+}
+
+/* Menu Mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    transition: 0.3s ease-in-out;
 }
 
 /* Banner */
 .banner {
-    background: url('banner.jpg') no-repeat center center/cover;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
+    position: relative;
+    width: 100%;
+    height: 800px; /* Altura fixa para o banner */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.banner .btn {
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slides img.active {
+    display: block;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 2;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.banner-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    text-align: center;
+    color: var(--white);
+    z-index: 1;
+}
+
+.banner-text h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.banner-text p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.banner-text .btn {
     display: inline-block;
-    padding: 10px 20px;
-    background: #ff4500;
-    color: white;
+    padding: 12px 24px;
+    background: var(--dark-green);
+    color: var(--white);
     text-decoration: none;
-    margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
 }
 
-/* Produtos */
+.banner-text .btn:hover {
+    background: var(--primary-color);
+}
+
+/* Produtos em Destaque */
 .destaques {
-    padding: 30px;
+    padding: 50px 20px;
     text-align: center;
+}
+
+.destaques h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
 }
 
 .produtos-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .produto {
-    border: 1px solid #ddd;
-    padding: 15px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    width: 260px;
     text-align: center;
-    max-width: 200px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.produto:hover {
+    transform: scale(1.05);
 }
 
 .produto img {
     width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.produto h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.produto p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
 }
 
 .produto .btn {
-    background: #008CBA;
-    color: white;
-    padding: 10px;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 12px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
 }
 
 .produto .btn:hover {
-    background: #005f75;
+    background: var(--dark-green);
+}
+
+/* Seção Sobre Nós */
+.sobre-nos {
+    padding: 50px 20px;
+    text-align: center;
+    background: var(--white);
+    margin: 30px 0;
+}
+
+.sobre-nos h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.sobre-nos p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Seção de Avaliações */
+.avaliacoes {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.avaliacoes h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.feedback p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 /* Rodapé */
 footer {
-    background: #333;
-    color: white;
+    background-color: var(--dark-green);
+    color: var(--white);
     text-align: center;
-    padding: 15px 0;
-    margin-top: 20px;
+    padding: 20px;
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .banner-text h1 {
+        font-size: 2rem;
+    }
+
+    .banner-text p {
+        font-size: 1.2rem;
+    }
+
+    .produto {
+        width: 100%;
+        max-width: 300px;
+    }
 }

@@ -1,4 +1,4 @@
-package model;
+package com.mave.loja.model;
 
 public class CarrinhoItem {
     private Produto produto;
